@@ -21,7 +21,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 public class UserEntity extends Auditable{
 
     @Column(unique = true, nullable = false, updatable = false)
-    private String UserId;
+    private String userId;
     private String firstName;
     private String lastName;
     @Column(unique = true, nullable = false)
@@ -31,14 +31,14 @@ public class UserEntity extends Auditable{
     private String phone;
     private String bio;
     private String imageUrl;
-    private boolean accountNoneExpired;
+    private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean enabled;
     private boolean hasMfa;
     @JsonIgnore
     private String qrCodeSecret;
-    @Column(columnDefinition = "TEXT")
-    private String qeCodeImageUri;
+    @Column(columnDefinition = "text")
+    private String qrCodeImageUri;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",

@@ -1,0 +1,2 @@
+INSERT  INTO users (id, user_id, first_name, last_name, email, phone, bio, reference_id, image_url, created_by, updated_by)
+VALUES (0, 023a123, 'System', 'System', 'system@gmail.com', '123412', 'This is not a user but the system itself', '12312f2134', 0, 0);
