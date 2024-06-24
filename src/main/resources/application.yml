@@ -51,6 +51,7 @@ spring:
     default-encoding: utf-8
     properties:
       mail:
+
         mime:
           charset: UTF-8
         smtp:

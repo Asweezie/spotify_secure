@@ -21,11 +21,12 @@ public class SpotifySecureApplication {
 
 	}
 
+
 	@Bean
 	CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
 		return args -> {
 			RequestContext.setUserId(0L);
-			var userRole = new RoleEntity();
+			/*var userRole = new RoleEntity();
 			userRole.setName(Authority.USER.name());
 			userRole.setAuthorities(Authority.USER);
 
@@ -37,7 +38,7 @@ public class SpotifySecureApplication {
 			roleRepository.save(userRole);
 			roleRepository.save(adminRole);
 
-			RequestContext.start();
+			RequestContext.start();*/
 
 		};
 	}
