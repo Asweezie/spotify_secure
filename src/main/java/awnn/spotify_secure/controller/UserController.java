@@ -7,9 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Map;
 
 import static awnn.spotify_secure.utility.RequestUtility.getResponse;
 import static java.util.Collections.emptyMap;
@@ -21,6 +25,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public ResponseEntity<Response> saveUser(@RequestBody @Valid UserRequest user, HttpServletRequest request) {
@@ -32,6 +37,14 @@ public class UserController {
     public ResponseEntity<Response> verifyAccount(@RequestParam("key") String key, HttpServletRequest request) {
         userService.verifyAccountKey(key);
         return ResponseEntity.ok().body(getResponse(request, emptyMap(), "Account Verified.", OK));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> test(@RequestBody UserRequest user) {
+
+        UsernamePasswordAuthenticationToken unauthenticated = UsernamePasswordAuthenticationToken.unauthenticated(user.getEmail(), user.getPassword());
+        Authentication authenticate = authenticationManager.authenticate(unauthenticated);
+        return ResponseEntity.ok().body(Map.of("user", authenticate));
     }
 
 
